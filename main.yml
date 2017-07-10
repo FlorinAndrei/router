@@ -1,0 +1,93 @@
+---
+- hosts: all
+  tasks:
+
+  - name: install packages
+    apt: name={{ item }} state=present
+    with_items:
+    - vim
+    - htop
+    - mc
+    - bind9
+    - dnsutils
+    - isc-dhcp-server
+    - iptables-persistent
+    - tcpdump
+    - nmap
+    - screen
+    - openvpn
+    - easy-rsa
+    - ruby2.0
+    - ruby2.0-dev
+    - ruby2.1-dev
+    - squid
+    - zip
+    - git
+
+  - name: configure networking
+    template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
+    with_items:
+    - etc/network/interfaces
+    - etc/dhcpcd.conf
+    - etc/default/isc-dhcp-server
+    - etc/dhcp/dhcpd.conf
+    - etc/iptables/rules.v4
+    - etc/bind/db.rpz
+    - etc/bind/named.conf.local
+    - etc/bind/named.conf.options
+    - etc/ssh/sshd_config
+    - etc/resolvconf.conf
+    - etc/rc.local
+
+  - name: other configs
+    template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
+    with_items:
+    - root/.screenrc
+
+  - name: configure sysctl
+    sysctl: name=net.ipv4.ip_forward value=1 sysctl_file=/etc/sysctl.d/10-firewall.conf sysctl_set=yes
+
+  - name: manage openvpn group
+    group: name=openvpn system=yes state=present
+
+  - name: manage openvpn user account
+    user: name=openvpn group=openvpn append=yes home=/var/openvpn shell=/usr/sbin/nologin system=yes state=present
+
+  - name: enable the openvpn service
+    service: name=openvpn enabled=yes
+
+  - name: enable / start services
+    service: name={{ item }} enabled=yes state=started
+    with_items:
+    - isc-dhcp-server
+    - bind9
+
+  - name: set generic aliases for all users
+    template: src=etc/profile.d/aliases.sh dest=/etc/profile.d/aliases.sh mode=0644 owner=root
+
+  - name: configure Squid
+    template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0600
+    with_items:
+    - etc/squid/squid.conf
+
+  - name: install Sensu gem
+    gem: name=sensu user_install=yes state=present version=0.29.0
+
+  - name: create Sensu dirs
+    file: path={{ item }} state=directory
+    with_items:
+    - /etc/sensu/conf.d
+    - /etc/sensu/extensions
+    - /var/log/sensu
+
+  - name: configure Sensu
+    template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
+    with_items:
+    - etc/sensu/conf.d/client.json
+    - etc/sensu/conf.d/transport.json
+    - etc/sensu/conf.d/rabbitmq.json
+    - etc/sensu/extensions/system-profile.rb
+    - etc/sensu/conf.d/system_profile.json
+    - etc/sensu/conf.d/extensions.json
+
+# TODO: logrotate sensu

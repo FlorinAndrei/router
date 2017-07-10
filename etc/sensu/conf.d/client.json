@@ -1,0 +1,10 @@
+{
+  "client": {
+    "name": "router",
+    "address": "192.168.1.254",
+    "environment": "home",
+    "subscriptions": [
+      "ubuntu"
+    ]
+  }
+}
