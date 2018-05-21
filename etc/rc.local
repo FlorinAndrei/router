@@ -18,6 +18,8 @@ if [ "$_IP" ]; then
 fi
 
 # sensu
-/root/sc.sh &
+/root/.gem/ruby/2.3.0/bin/sensu-client \
+  -e /etc/sensu/extensions \
+  -l /dev/null &
 
 exit 0

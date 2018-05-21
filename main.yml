@@ -7,6 +7,9 @@
     with_items:
     - vim
     - htop
+    - iotop
+    - apt-file
+    - autoconf
     - mc
     - bind9
     - dnsutils
@@ -17,9 +20,9 @@
     - screen
     - openvpn
     - easy-rsa
-    - ruby2.0
-    - ruby2.0-dev
-    - ruby2.1-dev
+    - ruby
+    - ruby-dev
+    - libffi-dev
     - squid
     - zip
     - git
@@ -27,7 +30,6 @@
   - name: configure networking
     template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
     with_items:
-    - etc/network/interfaces
     - etc/dhcpcd.conf
     - etc/default/isc-dhcp-server
     - etc/dhcp/dhcpd.conf
@@ -53,14 +55,12 @@
   - name: manage openvpn user account
     user: name=openvpn group=openvpn append=yes home=/var/openvpn shell=/usr/sbin/nologin system=yes state=present
 
-  - name: enable the openvpn service
-    service: name=openvpn enabled=yes
-
   - name: enable / start services
     service: name={{ item }} enabled=yes state=started
     with_items:
     - isc-dhcp-server
     - bind9
+    - openvpn
 
   - name: set generic aliases for all users
     template: src=etc/profile.d/aliases.sh dest=/etc/profile.d/aliases.sh mode=0644 owner=root
@@ -71,7 +71,7 @@
     - etc/squid/squid.conf
 
   - name: install Sensu gem
-    gem: name=sensu user_install=yes state=present version=0.29.0
+    gem: name=sensu user_install=yes state=present
 
   - name: create Sensu dirs
     file: path={{ item }} state=directory
