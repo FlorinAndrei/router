@@ -26,6 +26,7 @@ COMMIT
 -A INPUT -i lo -j ACCEPT
 -A INPUT -i eth1 -j ACCEPT
 -A INPUT -i tun0 -j ACCEPT
+-A INPUT -i br0  -j ACCEPT
 -A INPUT -j DROP
 COMMIT
 # Completed on Wed Apr 19 00:05:48 2017

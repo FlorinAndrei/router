@@ -22,4 +22,6 @@ fi
   -e /etc/sensu/extensions \
   -l /dev/null &
 
+/usr/sbin/service isc-dhcp-server restart
+
 exit 0

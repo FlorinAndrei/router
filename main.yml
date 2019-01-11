@@ -28,10 +28,14 @@
     - git
     - ntp
     - unattended-upgrades
+    - bridge-utils
+    - telnet
+    - rng-tools
 
   - name: configure networking
     template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
     with_items:
+    - etc/network/interfaces
     - etc/dhcpcd.conf
     - etc/default/isc-dhcp-server
     - etc/dhcp/dhcpd.conf
@@ -42,6 +46,8 @@
     - etc/ssh/sshd_config
     - etc/resolvconf.conf
     - etc/rc.local
+    tags:
+    - networking
 
   - name: other configs
     template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
