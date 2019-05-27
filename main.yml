@@ -31,6 +31,7 @@
     - bridge-utils
     - telnet
     - rng-tools
+    - mtr
 
   - name: configure networking
     template: src={{ item }} dest=/{{ item }} owner=root group=root mode=0644
