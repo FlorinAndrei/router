@@ -9,6 +9,7 @@
 -A PREROUTING -i eth0 -p tcp -m tcp --dport 443 -j DNAT --to 192.168.1.1:443
 -A PREROUTING -i eth0 -p tcp -m tcp --dport 587 -j DNAT --to 192.168.1.1:587
 -A PREROUTING -i eth0 -p tcp -m tcp --dport 993 -j DNAT --to 192.168.1.1:993
+-A PREROUTING -i eth0 -p tcp -m tcp --dport 2212 -j DNAT --to 192.168.1.1:22
 -A PREROUTING -i eth0 -p tcp -m tcp --dport 3001 -j DNAT --to 192.168.1.1:3001
 -A PREROUTING -i eth0 -p tcp -m tcp --dport 7777 -j DNAT --to 192.168.1.1:7777
 -A PREROUTING -i eth0 -p tcp -m tcp --dport 25565 -j DNAT --to 192.168.1.1:25565
