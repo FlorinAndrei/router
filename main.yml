@@ -115,4 +115,13 @@
     tags:
     - sensu-config
 
+  - name: auto-start Sensu
+    lineinfile:
+      dest: /etc/rc.local
+      line: '/root/.gem/ruby/2.3.0/bin/sensu-client -e /etc/sensu/extensions -l /dev/null &'
+      state: present
+      insertbefore: 'exit 0'
+    tags:
+    - sensu-config
+
 # TODO: logrotate sensu
