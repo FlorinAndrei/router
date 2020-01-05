@@ -34,6 +34,7 @@ macs+=( "3c:8d:20:05:0a:a3" )
 macs+=( "6c:5a:b5:54:e5:9e" )
 
 if [ "on" == $1 ]; then
+	$ipt -F traffic-control
 	for m in ${macs[@]}; do
 		$ipt -A traffic-control -m mac --mac-source ${m} -j ACCEPT
 	done
