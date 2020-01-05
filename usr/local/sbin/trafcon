@@ -28,6 +28,10 @@ macs+=( "60:5b:b4:ac:1f:8b" )
 macs+=( "44:1c:a8:f0:26:d3" )
 # m-phone
 macs+=( "88:79:7e:0c:06:1c" )
+# chromecast
+macs+=( "3c:8d:20:05:0a:a3" )
+# google assistant speaker
+macs+=( "6c:5a:b5:54:e5:9e" )
 
 if [ "on" == $1 ]; then
 	for m in ${macs[@]}; do
