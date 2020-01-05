@@ -24,6 +24,10 @@ macs+=( "b8:27:eb:77:ee:23" )
 macs+=( "24:f5:a2:84:5d:e2" )
 # ps4
 macs+=( "60:5b:b4:ac:1f:8b" )
+# m-laptop
+macs+=( "44:1c:a8:f0:26:d3" )
+# m-phone
+macs+=( "88:79:7e:0c:06:1c" )
 
 if [ "on" == $1 ]; then
 	for m in ${macs[@]}; do
