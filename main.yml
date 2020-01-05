@@ -156,7 +156,7 @@
       name: traffic control off Mon-Fri
       minute: "0"
       hour: "9"
-      weekday: "Mon-Fri"
+      weekday: "mon,tue,wed,thu,fri"
       job: "/usr/local/sbin/trafcon off"
       state: present
     tags:
@@ -167,7 +167,7 @@
       name: traffic control off Sat-Sun
       minute: "0"
       hour: "10"
-      weekday: "Sat-Sun"
+      weekday: "sat,sun"
       job: "/usr/local/sbin/trafcon off"
       state: present
     tags:
