@@ -33,7 +33,7 @@ if [ "on" == $1 ]; then
 	for m in ${macs[@]}; do
 		$ipt -A traffic-control -m mac --mac-source ${m} -j ACCEPT
 	done
-	$ipt -A traffic-control -s ${lan} -j LOG
+	$ipt -A traffic-control -s ${lan} -j LOG -m limit --limit 1/s --limit-burst 5
 	$ipt -A traffic-control -s ${lan} -j DROP
 	exit
 fi
