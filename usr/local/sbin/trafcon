@@ -7,20 +7,21 @@ fi
 
 ipt="/sbin/iptables"
 lan="192.168.1.0/24"
+
 macs=()
 # predator
 macs+=( "48:f1:7f:c2:ab:69" )
-# h1
+# h1 phone
 macs+=( "88:5f:e8:70:37:45" )
-# tic
+# tic watch
 macs+=( "30:95:e3:32:73:d2" )
 # server
 macs+=( "38:2c:4a:ba:b1:6a" )
 # media
 macs+=( "74:d4:35:9f:1d:ee" )
-# weather
+# weather pi
 macs+=( "b8:27:eb:77:ee:23" )
-# linksys
+# linksys tower
 macs+=( "24:f5:a2:84:5d:e2" )
 # ps4
 macs+=( "60:5b:b4:ac:1f:8b" )
