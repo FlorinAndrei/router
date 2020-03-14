@@ -33,6 +33,8 @@ macs+=( "88:79:7e:0c:06:1c" )
 macs+=( "3c:8d:20:05:0a:a3" )
 # google assistant speaker
 macs+=( "6c:5a:b5:54:e5:9e" )
+# v phone
+macs+=( "08:cc:27:41:22:0a" )
 
 if [ "on" == $1 ]; then
 	$ipt -F traffic-control
