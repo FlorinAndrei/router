@@ -145,7 +145,7 @@
     cron:
       name: traffic control on
       minute: "0"
-      hour: "23"
+      hour: "0"
       job: "/usr/local/sbin/trafcon on"
       state: present
     tags:
