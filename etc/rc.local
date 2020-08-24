@@ -17,10 +17,10 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-# sensu
-/root/.gem/ruby/2.3.0/bin/sensu-client \
-  -e /etc/sensu/extensions \
-  -l /dev/null &
+#/root/.gem/ruby/2.3.0/bin/sensu-client -e /etc/sensu/extensions -l /dev/null &
+
+cd /opt/node_exporter
+screen -S node -dm ./run.sh
 
 /usr/sbin/service isc-dhcp-server restart
 
